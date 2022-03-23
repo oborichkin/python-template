@@ -1,6 +1,6 @@
 PROJECT_NAME = template
 
-.PHONY = install test hooks build clean
+.PHONY = test build push clean hooks
 
 install: venv hooks
 
@@ -12,6 +12,9 @@ hooks: venv
 
 build: venv clean
 	$(VENV)/python setup.py sdist bdist_wheel
+
+sphinx: venv
+	. $(VENV)/activate && cd docs && $(MAKE) html
 
 clean:
 	rm -rf build dist *.egg-info
